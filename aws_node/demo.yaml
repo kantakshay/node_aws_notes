@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Basic CloudFormation template for Node.js application deployment on EC2
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type for Node.js app
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t3.micro
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+Resources:
+  # Security Group allowing HTTP traffic
+  NodeAppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable HTTP access to Node.js app
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0  # Open to all IPs for HTTP access
+
+  # IAM Role for EC2 to interact with AWS resources (optional)
+  EC2InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: NodeAppPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetObject
+                Resource: "*"
+
+  # EC2 Instance to run the Node.js app
+  NodeAppInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-0c55b159cbfafe1f0  # Example: Replace with your region's Amazon Linux 2 AMI ID
+      SecurityGroups:
+        - Ref: NodeAppSecurityGroup
+      KeyName: my-key-pair  # Replace with your own EC2 key pair name
+      IamInstanceProfile: !Ref EC2InstanceRole
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          # Update system and install dependencies
+          yum update -y
+          yum install -y git
+          curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+          yum install -y nodejs
+          # Clone your Node.js app repository (replace with your actual repo URL)
+          cd /home/ec2-user
+          git clone https://github.com/your-username/your-node-app.git
+          cd your-node-app
+          # Install dependencies and start the app
+          npm install
+          nohup node app.js &  # Assuming app.js is your Node.js entry point
+          
+Outputs:
+  InstancePublicIP:
+    Description: "Public IP of the Node.js EC2 instance"
+    Value: !GetAtt NodeAppInstance.PublicIp
