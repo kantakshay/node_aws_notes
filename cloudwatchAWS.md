@@ -1,6 +1,6 @@
 # Amazon CloudWatch
 
-< Amazon CloudWatch is a monitoring and observability service provided by AWS (Amazon Web Services) to help track and manage your cloud resources and applications. It allows you to collect and track metrics, set up alarms, and view logs, giving you the ability to gain insights into your AWS environment. Let’s dive into the key components: Alarms, Logs, and Metrics.
+> Amazon CloudWatch is a monitoring and observability service provided by AWS (Amazon Web Services) to help track and manage your cloud resources and applications. It allows you to collect and track metrics, set up alarms, and view logs, giving you the ability to gain insights into your AWS environment. Let’s dive into the key components: Alarms, Logs, and Metrics.
 
  **1. CloudWatch Metrics**
 < CloudWatch Metrics are the fundamental unit of measurement in CloudWatch. They provide data about the performance of your AWS resources and applications over time.
@@ -16,7 +16,7 @@
 ---
 **2. CloudWatch Alarms**
 
-< CloudWatch Alarms allow you to monitor a specific metric and trigger actions if that metric breaches a defined threshold. You can set alarms to automatically react to changes in the state of your resources or applications.
+> CloudWatch Alarms allow you to monitor a specific metric and trigger actions if that metric breaches a defined threshold. You can set alarms to automatically react to changes in the state of your resources or applications.
 
 **Types of Alarms**:
 
@@ -39,15 +39,16 @@
 - **ALARM**: The metric has breached the threshold.
 - **INSUFFICIENT_DATA**: Not enough data is available to determine the state.
 
- ---
-Example: An alarm might trigger when the CPU utilization of an EC2 instance exceeds 80% for 5 minutes, sending an email or triggering a Lambda function to scale resources.
+
 ---
+Example: An alarm might trigger when the CPU utilization of an EC2 instance exceeds 80% for 5 minutes, sending an email or triggering a Lambda function to scale resources.
+
 
 
 ---
 
 **3. CloudWatch Logs**
-< CloudWatch Logs allow you to collect and monitor log data from your AWS resources and applications. They are particularly useful for troubleshooting, security auditing, and tracking the behavior of your applications.
+> CloudWatch Logs allow you to collect and monitor log data from your AWS resources and applications. They are particularly useful for troubleshooting, security auditing, and tracking the behavior of your applications.
 
 - **Log Groups:** A Log Group is a collection of logs that share the same retention and monitoring settings. For example, all logs related to your EC2 instances might be stored in a specific Log Group.
 
