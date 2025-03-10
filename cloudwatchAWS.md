@@ -3,7 +3,8 @@
 > Amazon CloudWatch is a monitoring and observability service provided by AWS (Amazon Web Services) to help track and manage your cloud resources and applications. It allows you to collect and track metrics, set up alarms, and view logs, giving you the ability to gain insights into your AWS environment. Let’s dive into the key components: Alarms, Logs, and Metrics.
 
  **1. CloudWatch Metrics**
-< CloudWatch Metrics are the fundamental unit of measurement in CloudWatch. They provide data about the performance of your AWS resources and applications over time.
+ 
+> CloudWatch Metrics are the fundamental unit of measurement in CloudWatch. They provide data about the performance of your AWS resources and applications over time.
 
 **Definition**: A metric represents a time-ordered set of data points that are published to CloudWatch at a regular interval (usually every minute or longer). Each metric corresponds to a specific aspect of your resource or application.
 
